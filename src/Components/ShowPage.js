@@ -2,16 +2,16 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
+const API=process.env.REACT_APP_API_URL
 
 export default function ShowPage(){
     const {index}=useParams()
     const [data,setData]=useState([])
-    const API=process.env.REACT_APP_API_URL
     const navigate=useNavigate()
 
     useEffect(()=>{
         axios.get(`${API}/transactions/${index}`).then(res=>setData(res.data))
-    },[])
+    },[index])
 
 
     const handleDelete = () => {

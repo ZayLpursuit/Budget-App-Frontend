@@ -2,17 +2,17 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
+const API = process.env.REACT_APP_API_URL;
 
 export default function EditPage(){
  
     const [form,setForm]=useState({})
     const navigate=useNavigate()
     const {index}=useParams()
-    const API = process.env.REACT_APP_API_URL;
     
     useEffect(()=>{
         axios.get(`${API}/transactions/${Number(index)}`).then(res=>setForm(res.data))
-    },[])
+    },[index])
     
     function handleChange(e){
         setForm({
